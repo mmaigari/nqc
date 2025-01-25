@@ -1,0 +1,45 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Participants") do |sheet|
+  # Headers with styling
+  header_style = sheet.styles.add_style(
+    bg_color: "338BAA",
+    fg_color: "FFFFFF",
+    b: true,
+    alignment: { horizontal: :center }
+  )
+  
+  headers = [
+    "Full Name", "Gender", "Marital Status", "Date of Birth",
+    "Email", "Phone", "State", "LGA", "Ward", "Year of Musabaqa", "Address",
+    "Bank Name", "Account Name", "Account Number",
+    "Ticket Type", "Registration Date"
+  ]
+  
+  sheet.add_row headers, style: header_style
+
+  # Data rows
+  @participants.each do |participant|
+    sheet.add_row [
+      participant.full_name,
+      participant.gender,
+      participant.marital_status,
+      participant.date_of_birth,
+      participant.email_address,
+      participant.phone_number,
+      participant.state,
+      participant.lga,
+      participant.ward,
+      participant.year_of_musabaqa,
+      participant.home_address,
+      participant.bank_name,
+      participant.account_name,
+      participant.account_number,
+      participant.ticket_type,
+      participant.created_at.strftime("%Y-%m-%d")
+    ]
+  end
+
+  # Auto-fit columns
+  sheet.column_widths *([20] * headers.length)
+end

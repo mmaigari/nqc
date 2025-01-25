@@ -1,0 +1,5 @@
+<% flash.each do |type, message| %>
+  <div class="fixed top-4 right-4 flex items-center p-4 mb-4 text-sm rounded-lg <%= type == 'success' ? 'text-green-800 bg-green-50' : 'text-red-800 bg-red-50' %>" role="alert">
+    <span class="font-medium"><%= message %></span>
+  </div>
+<% end %>

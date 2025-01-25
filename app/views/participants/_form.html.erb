@@ -1,0 +1,206 @@
+<% nigerian_states = [
+  "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno",
+  "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "FCT", "Gombe", "Imo",
+  "Jigawa", "Kaduna", "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa",
+  "Niger", "Ogun", "Ondo", "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba",
+  "Yobe", "Zamfara"
+] %>
+
+<%= form_with(model: participant, class: "max-w-3xl mx-auto mt-8") do |form| %>
+  <% if participant.errors.any? %>
+    <div class="bg-red-50 p-4 rounded-md mb-6">
+      <h2 class="text-red-800 text-sm font-medium"><%= pluralize(participant.errors.count, "error") %></h2>
+      <ul class="mt-3 list-disc list-inside text-red-700">
+        <% participant.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <!-- Personal Information Section -->
+    <div class="p-8 space-y-8">
+      <div class="border-b pb-4">
+        <h3 class="text-xl font-semibold text-gray-900">Personal Information</h3>
+       
+      </div>
+
+      <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-3">
+        <div>
+          <%= form.label :first_name, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :first_name, 
+              required: true,
+              class: "mt-1 block w-full border-0 border-b border-gray-300 bg-transparent focus:border-indigo-500 focus:ring-0 px-0 py-2", 
+              placeholder: "Enter first name" %>
+        </div>
+
+        <div>
+          <%= form.label :middle_name, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :middle_name, 
+              class: "mt-1 block w-full border-0 border-b border-gray-300 bg-transparent focus:border-indigo-500 focus:ring-0 px-0 py-2", 
+              placeholder: "Enter middle name" %>
+        </div>
+
+        <div>
+          <%= form.label :surname, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :surname, 
+              required: true,
+              class: "mt-1 block w-full border-0 border-b border-gray-300 bg-transparent focus:border-indigo-500 focus:ring-0 px-0 py-2", 
+              placeholder: "Enter surname" %>
+        </div>
+
+        <!-- Gender and Marital Status side by side -->
+        <div class="sm:col-span-3 grid grid-cols-2 gap-x-4">
+          <div class="border rounded-md p-4">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Gender</label>
+            <div class="flex space-x-6">
+              <div class="flex items-center">
+                <%= form.radio_button :gender, 'Male', class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" %>
+                <%= form.label :gender_male, "Male", class: "ml-2 text-sm text-gray-700" %>
+              </div>
+              <div class="flex items-center">
+                <%= form.radio_button :gender, 'Female', class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" %>
+                <%= form.label :gender_female, "Female", class: "ml-2 text-sm text-gray-700" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="border rounded-md p-4">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Marital Status</label>
+            <div class="flex space-x-6">
+              <div class="flex items-center">
+                <%= form.radio_button :marital_status, 'Single', class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" %>
+                <%= form.label :marital_status_single, "Single", class: "ml-2 text-sm text-gray-700" %>
+              </div>
+              <div class="flex items-center">
+                <%= form.radio_button :marital_status, 'Married', class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" %>
+                <%= form.label :marital_status_married, "Married", class: "ml-2 text-sm text-gray-700" %>
+              </div>
+              <div class="flex items-center">
+              <%= form.radio_button :marital_status, 'Widow', class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" %>
+              <%= form.label :marital_status_married, "Widow", class: "ml-2 text-sm text-gray-700" %>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <%= form.label :date_of_birth, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.date_field :date_of_birth, 
+              class: "mt-1 block w-full border-0 border-b border-gray-300 bg-transparent focus:border-indigo-500 focus:ring-0 px-0 py-2" %>
+        </div>
+
+        <div>
+          <%= form.label :state, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.select :state, 
+              nigerian_states, 
+              { prompt: "Select state" }, 
+              class: "mt-1 block w-full border-0 border-b border-gray-300 bg-transparent focus:border-indigo-500 focus:ring-0 px-0 py-2" %>
+        </div>
+
+        <div>
+          <%= form.label :lga, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :lga, 
+              class: "mt-1 block w-full border-0 border-b border-gray-300 bg-transparent focus:border-indigo-500 focus:ring-0 px-0 py-2", 
+              placeholder: "Enter LGA" %>
+        </div>
+
+        <div>
+          <%= form.label :ward, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :ward, 
+              class: "mt-1 block w-full border-0 border-b border-gray-300 bg-transparent focus:border-indigo-500 focus:ring-0 px-0 py-2",
+              placeholder: "Enter Ward" %>
+        </div>
+
+        <div>
+          <%= form.label :year_of_musabaqa, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.number_field :year_of_musabaqa, 
+              required: true,
+              min: 1900,
+              max: Time.current.year,
+              class: "mt-1 block w-full border-0 border-b border-gray-300 bg-transparent focus:border-indigo-500 focus:ring-0 px-0 py-2",
+              placeholder: "Enter Year of Musabaqa (e.g., 2024)" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Information Section -->
+    <div class="p-8 bg-gray-50 space-y-8">
+      <div class="border-b pb-4">
+        <h3 class="text-xl font-semibold text-gray-900">Contact Information</h3>
+      </div>
+
+      <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
+        <div>
+          <%= form.label :email_address, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.email_field :email_address, 
+              required: true,
+              class: "mt-1 block w-full border-0 border-b border-gray-300 bg-transparent focus:border-indigo-500 focus:ring-0 px-0 py-2" %>
+        </div>
+
+        <div>
+          <%= form.label :phone_number, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.telephone_field :phone_number, 
+              required: true,
+              maxlength: 11,
+              pattern: "[0-9]{11}",
+              title: "Phone number must be 11 digits",
+              class: "mt-1 block w-full border-0 border-b border-gray-300 bg-transparent focus:border-indigo-500 focus:ring-0 px-0 py-2" %>
+        </div>
+
+        <div class="sm:col-span-2">
+          <%= form.label :home_address, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_area :home_address, rows: 3, class: "mt-1 block w-full border-0 border-b border-gray-300 bg-transparent focus:border-indigo-500 focus:ring-0 px-0 py-2", placeholder: "Enter address" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bank Information Section -->
+    <div class="p-8 space-y-8">
+      <div class="border-b pb-4">
+        <h3 class="text-xl font-semibold text-gray-900">Bank Information</h3>
+      </div>
+
+      <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
+        <div class="sm:col-span-2">
+          <%= form.label :bank_name, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :bank_name, class: "mt-1 block w-full border-0 border-b border-gray-300 bg-transparent focus:border-indigo-500 focus:ring-0 px-0 py-2" %>
+        </div>
+
+        <div>
+          <%= form.label :account_name, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :account_name, class: "mt-1 block w-full border-0 border-b border-gray-300 bg-transparent focus:border-indigo-500 focus:ring-0 px-0 py-2" %>
+        </div>
+
+        <div>
+          <%= form.label :account_number, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :account_number, 
+              maxlength: 10,
+              pattern: "[0-9]{10}",
+              title: "Account number must be 10 digits",
+              class: "mt-1 block w-full border-0 border-b border-gray-300 bg-transparent focus:border-indigo-500 focus:ring-0 px-0 py-2" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ticket Type Section -->
+    <div class="p-8 space-y-8">
+    
+
+      <div class="mb-4">
+        <%= form.label :ticket_type, class: "block text-sm font-medium text-gray-700" %>
+        <%= form.text_field :ticket_type, 
+            value: "Hafiz Quran",
+            disabled: true,
+            class: "mt-1 block w-full border-0 border-b border-gray-300 bg-gray-100 focus:border-indigo-500 focus:ring-0 px-0 py-2" %>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="px-8 py-4 bg-gray-50 text-right">
+      <%= form.submit "Submit Registration", 
+          class: "inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#01272B] hover:bg-[#001a1d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#01272B]" %>
+    </div>
+  </div>
+<% end %>

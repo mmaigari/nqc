@@ -1,0 +1,55 @@
+<div class="min-h-screen bg-gray-100">
+  <nav class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex-shrink-0 flex items-center">
+          <h1 class="text-xl font-bold">Participants List</h1>
+        </div>
+        <div class="flex items-center">
+          <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "ml-4 px-4 py-2 text-sm text-red-600 hover:text-red-800" %>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div class="flex justify-between items-center mb-4">
+        <h1 class="text-2xl font-bold">
+          Participants 
+          <span class="inline-flex items-center justify-center px-3 py-1 ml-2 text-sm font-medium text-white bg-indigo-600 rounded-full">
+            <%= @participants.count %>
+          </span>
+        </h1>
+        <%= link_to "Export to Excel", participants_path(format: :xlsx), 
+            class: "px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" %>
+      </div>
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Participant</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ticket Type</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">State</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <% @participants.each do |participant| %>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= participant.full_name %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= participant.ticket_type %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= participant.phone_number %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= participant.state %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <%= link_to "View", participant_path(participant), class: "text-indigo-600 hover:text-indigo-900" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<% content_for :title, "Participants" %>
+

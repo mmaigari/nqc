@@ -1,0 +1,17 @@
+<% content_for :title, "New participant" %>
+
+<div class="min-h-screen bg-gray-50">
+  <div class="max-w-3xl mx-auto pt-10 pb-12 px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+        Event Form
+      </h1>
+      <p class="mt-4 text-lg text-gray-500">
+        Fill the following form to register for the event.
+      </p>
+    </div>
+
+    <%= render "form", participant: @participant %>
+  </div>
+</div>
+
